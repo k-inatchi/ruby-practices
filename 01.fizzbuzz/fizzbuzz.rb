@@ -3,11 +3,11 @@
 1.upto(20) do |i|
   result =
     if (i % 3 == 0 && i % 5 == 0)
-      "FizzBuzz"
+      'FizzBuzz'
     elsif (i % 3 == 0)
-      "Fizz"
+      'Fizz'
     elsif (i % 5 == 0)
-      "Buzz"
+      'Buzz'
     else
       i
     end
