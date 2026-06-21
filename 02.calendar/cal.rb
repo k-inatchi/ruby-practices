@@ -12,17 +12,14 @@ today = Date.today
 year = (params[:year] || today.year).to_i
 month = (params[:month] || today.month).to_i
 first_date = Date.new(year, month, 1)
-lastday = Date.new(year, month, -1).day
-first_date_wday = first_date.wday
-month_name = first_date.strftime("%B")
-header = "#{month_name} #{year}"
+header = "#{first_date.strftime("%B")} #{year}"
 week = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].join(" ")
 
 puts header.center(week.length)
 puts week
-wday = first_date_wday
+wday = first_date.wday
 print "   " * wday
-1.upto(lastday) do |i|
+1.upto(Date.new(year, month, -1).day) do |i|
   wday = wday + 1
   print i.to_s.rjust(2) + " "
   if wday % 7 == 0
