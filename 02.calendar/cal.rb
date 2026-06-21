@@ -4,8 +4,8 @@ require 'optparse'
 
 opt = OptionParser.new
 params = {}
-opt.on('--year YEAR') {|v| params[:year] = v}
-opt.on('--month MONTH') {|v| params[:month] = v}
+opt.on('-y YEAR') {|v| params[:year] = v}
+opt.on('-m MONTH') {|v| params[:month] = v}
 opt.parse!(ARGV)
 
 DAY_WIDTH = 2
