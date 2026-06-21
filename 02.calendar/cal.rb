@@ -15,11 +15,11 @@ month_name = Date.new(year, month, 1).strftime("%B")
 firstday = Date.new(year, month, 1).day
 lastday = Date.new(year, month, -1).day
 firstday_wday = Date.new(year, month, 1).wday
-header = "     #{month_name} #{year}"
-week = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+header = "#{month_name} #{year}"
+week = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].join(" ")
 
-puts header
-puts week.join(" ")
+puts header.center(week.length)
+puts week
 wday = firstday_wday
 print "   " * wday
 firstday.upto(lastday) do |i|
