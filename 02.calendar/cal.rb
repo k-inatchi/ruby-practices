@@ -11,18 +11,18 @@ opt.parse!(ARGV)
 today = Date.today
 year = (params[:year] || today.year).to_i
 month = (params[:month] || today.month).to_i
-month_name = Date.new(year, month, 1).strftime("%B")
-firstday = Date.new(year, month, 1).day
+first_date = Date.new(year, month, 1)
 lastday = Date.new(year, month, -1).day
-firstday_wday = Date.new(year, month, 1).wday
+first_date_wday = first_date.wday
+month_name = first_date.strftime("%B")
 header = "#{month_name} #{year}"
 week = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].join(" ")
 
 puts header.center(week.length)
 puts week
-wday = firstday_wday
+wday = first_date_wday
 print "   " * wday
-firstday.upto(lastday) do |i|
+1.upto(lastday) do |i|
   wday = wday + 1
   print i.to_s.rjust(2) + " "
   if wday % 7 == 0
