@@ -33,4 +33,7 @@ print (' ' * DAY_WIDTH + ' ') * wday
     print "\n"
   end
 end
-puts
+
+if wday % WEEK_DAYS != 0
+  puts
+end
