@@ -2,6 +2,10 @@
 require 'date'
 require 'optparse'
 
+def display_width(str)
+  str.length + str.chars.reject{|c| c.ascii_only?}.length
+end
+
 opt = OptionParser.new
 params = {}
 opt.on('-y YEAR') {|v| params[:year] = v}
@@ -10,14 +14,15 @@ opt.parse!(ARGV)
 
 DAY_WIDTH = 2
 WEEK_DAYS = 7
+
 today = Date.today
 year = (params[:year] || today.year).to_i
 month = (params[:month] || today.month).to_i
 first_date = Date.new(year, month, 1)
-header = "#{first_date.strftime('%B')} #{year}"
-week = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].join(' ')
+header = "#{month}月 #{year}"
+week = %w(日 月 火 水 木 金 土).join(' ')
 
-puts header.center(week.length)
+puts header.center(display_width(week))
 puts week
 wday = first_date.wday
 print (' ' * DAY_WIDTH + ' ') * wday
