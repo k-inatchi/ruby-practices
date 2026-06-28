@@ -8,8 +8,8 @@ end
 
 opt = OptionParser.new
 params = {}
-opt.on('-y YEAR') {|v| params[:year] = v}
-opt.on('-m MONTH') {|v| params[:month] = v}
+opt.on('-y YEAR') { |v| params[:year] = v }
+opt.on('-m MONTH') { |v| params[:month] = v }
 opt.parse!(ARGV)
 
 DAY_WIDTH = 2
@@ -26,13 +26,15 @@ puts header.center(display_width(week))
 puts week
 wday = first_date.wday
 print (' ' * DAY_WIDTH + ' ') * wday
-1.upto(Date.new(year, month, -1).day) do |i|
+
+first_date.upto(Date.new(year,month,-1)) do |i|
   wday = wday + 1
-  print i.to_s.rjust(DAY_WIDTH) + ' '
+  print i.day.to_s.rjust(DAY_WIDTH) + ' '
   if wday % WEEK_DAYS == 0
     print "\n"
   end
 end
+
 
 if wday % WEEK_DAYS != 0
   puts
