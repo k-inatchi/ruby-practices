@@ -9,11 +9,7 @@ scores = score.split(',')
 
 shots = []
 scores.each do |score|
-  if score == 'X'
-    shots << max_pins
-  else
-    shots << score.to_i
-  end
+  shots << (score == 'X' ? max_pins : score.to_i)
 end
 
 point = 0
