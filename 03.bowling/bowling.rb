@@ -16,13 +16,13 @@ point = 0
 i = 0
 1.upto(frames) do
   if shots[i] == max_pins
-    point += shots[i] + shots[i+1] + shots[i+2]
+    point += shots[i] + shots[i + 1] + shots[i + 2]
     i += 1
-  elsif shots[i] + shots[i+1] == max_pins
-    point += shots[i] + shots[i+1] + shots[i+2]
+  elsif shots[i] + shots[i + 1] == max_pins
+    point += shots[i] + shots[i + 1] + shots[i + 2]
     i += 2
   else
-    point += shots[i] + shots[i+1]
+    point += shots[i] + shots[i + 1]
     i += 2
   end
 end
