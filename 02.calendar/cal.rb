@@ -24,18 +24,13 @@ week = %w(日 月 火 水 木 金 土).join(' ')
 
 puts header.center(display_width(week))
 puts week
-wday = first_date.wday
-print (' ' * DAY_WIDTH + ' ') * wday
+print (' ' * DAY_WIDTH + ' ') * first_date.wday
 
-first_date.upto(Date.new(year,month,-1)) do |i|
-  wday = wday + 1
-  print i.day.to_s.rjust(DAY_WIDTH) + ' '
-  if wday % WEEK_DAYS == 0
+first_date.upto(Date.new(year, month, -1)) do |target_date|
+  print target_date.day.to_s.rjust(DAY_WIDTH) + ' '
+    if target_date.saturday?
     print "\n"
   end
 end
 
-
-if wday % WEEK_DAYS != 0
-  puts
-end
+puts unless Date.new(year, month, -1).saturday?
