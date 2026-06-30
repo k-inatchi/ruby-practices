@@ -4,8 +4,8 @@
 frames = 10
 max_pins = 10
 
-score = ARGV[0]
-scores = score.split(',')
+argv_score = ARGV[0]
+scores = argv_score.split(',')
 
 shots = []
 scores.each do |score|
@@ -27,4 +27,4 @@ i = 0
   end
 end
 
-p point
+puts point
