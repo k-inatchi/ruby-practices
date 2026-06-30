@@ -13,17 +13,17 @@ scores.each do |score|
 end
 
 point = 0
-i = 0
+shot_index = 0
 1.upto(frames) do
-  if shots[i] == max_pins
-    point += shots[i] + shots[i + 1] + shots[i + 2]
-    i += 1
-  elsif shots[i] + shots[i + 1] == max_pins
-    point += shots[i] + shots[i + 1] + shots[i + 2]
-    i += 2
+  if shots[shot_index] == max_pins
+    point += shots[shot_index] + shots[shot_index + 1] + shots[shot_index + 2]
+    shot_index += 1
+  elsif shots[shot_index] + shots[shot_index + 1] == max_pins
+    point += shots[shot_index] + shots[shot_index + 1] + shots[shot_index + 2]
+    shot_index += 2
   else
-    point += shots[i] + shots[i + 1]
-    i += 2
+    point += shots[shot_index] + shots[shot_index + 1]
+    shot_index += 2
   end
 end
 
