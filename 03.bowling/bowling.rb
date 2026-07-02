@@ -17,7 +17,7 @@ shot_index = 0
 
 1.upto(FRAMES) do
   strike = shots[shot_index] == MAX_PINS
-  spare = shots[shot_index] + shots[shot_index + 1] == MAX_PINS
+  spare = !strike && shots[shot_index] + shots[shot_index + 1] == MAX_PINS
   if strike
     point += shots[shot_index] + shots[shot_index + 1] + shots[shot_index + 2]
     shot_index += 1
