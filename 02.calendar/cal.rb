@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true 
+
 require 'date'
 require 'optparse'
 
 def display_width(str)
-  str.length + str.chars.reject{|c| c.ascii_only?}.length
+  str.length + str.chars.reject(&:ascii_only?).length
 end
 
 opt = OptionParser.new
@@ -29,7 +31,7 @@ print (' ' * DAY_WIDTH + ' ') * first_date.wday
 
 first_date.upto(last_date) do |target_date|
   print target_date.day.to_s.rjust(DAY_WIDTH) + ' '
-    if target_date.saturday?
+  if target_date.saturday?
     print "\n"
   end
 end
