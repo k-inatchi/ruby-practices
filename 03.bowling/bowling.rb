@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-FRAMES = 10
 MAX_PINS = 10
 
 argv_score = ARGV[0]
@@ -12,7 +11,7 @@ shots = scores.map { |score| score == 'X' ? MAX_PINS : score.to_i }
 point = 0
 shot_index = 0
 
-1.upto(FRAMES) do
+10.times do
   strike = shots[shot_index] == MAX_PINS
   spare = !strike && shots[shot_index, 2].sum == MAX_PINS
   sum_count = strike || spare ? 3 : 2
