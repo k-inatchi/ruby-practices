@@ -7,10 +7,7 @@ MAX_PINS = 10
 argv_score = ARGV[0]
 scores = argv_score.split(',')
 
-shots = []
-scores.each do |score|
-  shots << (score == 'X' ? MAX_PINS : score.to_i)
-end
+shots = scores.map{ |score| (score == 'X' ? MAX_PINS : score.to_i) }
 
 point = 0
 shot_index = 0
