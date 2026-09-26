@@ -15,4 +15,47 @@
 #   https://docs.ruby-lang.org/ja/latest/method/Integer/i/ceildiv.html
 # 行の値はそれぞれfilesのx番目、filesのx番目+行数*1,filesのx番目+行数*2となる
 # 値名をprint、値が存在しない場合はスキップ
-# 次の列の値がない場合は空白を入れない
+# file名がない場合は空白も入れない
+
+require 'io/console'
+
+def ls(target_dir = '.')
+  files = Dir.glob('*', base: target_dir).sort_by { |file_name| [file_name.downcase] }
+  return if files.empty?
+
+  tab_space = 8
+  max_columns = 3
+  window_width = IO.console.winsize[1]
+  max_str_length = files.map { |file| str_length(file) }.max
+  max_display_width = (max_str_length + 1).ceildiv(tab_space) * tab_space
+  display_columns = max_display_width > window_width ? 1 : (window_width / max_display_width).clamp(1, max_columns)
+  display_rows = files.count.ceildiv(display_columns)
+
+  print_file_name(files, display_rows, display_columns, max_display_width)
+end
+
+def print_file_name(files, display_rows, display_columns, display_width)
+  display_rows.times do |row|
+    display_columns.times do |column|
+      index = row + (display_rows * column)
+      file = files[index]
+      next if file.nil?
+
+      space_count = (display_width - str_length(file))
+      print file
+      print(' ' * space_count) if column < (display_columns - 1)
+    end
+    puts
+  end
+end
+
+def str_length(str)
+  width = 0
+  half_width = /\A[ -~｡-ﾟ]\z/
+  str.each_char do |char|
+    width += char.match?(half_width) ? 1 : 2
+  end
+  width
+end
+
+ls(ARGV[0])
