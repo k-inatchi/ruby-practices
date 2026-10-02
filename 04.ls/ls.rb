@@ -8,11 +8,9 @@ def ls(target_dir = '.')
   return if files.empty?
 
   tab_space = 8
-  max_columns = 3
-  window_width = IO.console.winsize[1]
   max_str_length = files.map { |file| str_length(file) }.max
   max_display_width = (max_str_length + 1).ceildiv(tab_space) * tab_space
-  display_columns = max_display_width > window_width ? 1 : (window_width / max_display_width).clamp(1, max_columns)
+  display_columns = 3
   display_rows = files.count.ceildiv(display_columns)
 
   print_file_name(files, display_rows, display_columns, max_display_width)
