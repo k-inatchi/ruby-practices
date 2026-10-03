@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'io/console'
-
 def ls(target_dir = '.')
   files = Dir.glob('*', base: target_dir).sort_by { |file_name| [file_name.downcase] }
   return if files.empty?
