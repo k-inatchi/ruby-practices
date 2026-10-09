@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 def ls(target_dir = '.')
-  files = Dir.glob('*', base: target_dir).sort_by { |file_name| [file_name.downcase] }
+  files = Dir.glob('*', base: target_dir).sort
   return if files.empty?
 
   tab_space = 8
