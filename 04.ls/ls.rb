@@ -1,8 +1,14 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-def ls(target_dir = '.')
-  files = Dir.glob('*', base: target_dir).sort
+require 'optparse'
+
+def ls(target_dir = '.', show_all)
+  if show_all == false
+    files = Dir.glob('*', base: target_dir).sort
+  else
+    files = Dir.entries(target_dir).sort
+  end
   return if files.empty?
 
   tab_space = 8
@@ -38,4 +44,8 @@ def str_length(str)
   width
 end
 
-ls(ARGV[0])
+opt = OptionParser.new
+show_all = false
+opt.on('-a') { |v| show_all = v }
+opt.parse!(ARGV)
+ls(ARGV.empty? ? '.' : ARGV[0], show_all)
