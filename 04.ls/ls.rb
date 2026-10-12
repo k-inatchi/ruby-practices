@@ -3,12 +3,8 @@
 
 require 'optparse'
 
-def ls(target_dir = '.', show_all)
-  if show_all == false
-    files = Dir.glob('*', base: target_dir).sort
-  else
-    files = Dir.entries(target_dir).sort
-  end
+def ls(target_dir, show_all)
+  files = show_all == false ? Dir.glob('*', base: target_dir).sort : Dir.entries(target_dir).sort
   return if files.empty?
 
   tab_space = 8
