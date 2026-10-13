@@ -4,7 +4,7 @@
 require 'optparse'
 
 def ls(target_dir, show_all)
-  files = show_all == false ? Dir.glob('*', base: target_dir).sort : Dir.entries(target_dir).sort
+  files = (show_all ? Dir.entries(target_dir) : Dir.glob('*', base: target_dir)).sort
   return if files.empty?
 
   tab_space = 8
@@ -13,17 +13,17 @@ def ls(target_dir, show_all)
   display_columns = 3
   display_rows = files.count.ceildiv(display_columns)
 
-  print_file_name(files, display_rows, display_columns, max_display_width)
+  print_file_names(files, display_rows, display_columns, max_display_width)
 end
 
-def print_file_name(files, display_rows, display_columns, display_width)
+def print_file_names(files, display_rows, display_columns, display_width)
   display_rows.times do |row|
     display_columns.times do |column|
       index = row + (display_rows * column)
       file = files[index]
       next if file.nil?
 
-      space_count = (display_width - str_length(file))
+      space_count = display_width - str_length(file)
       print file
       print(' ' * space_count) if column < (display_columns - 1)
     end
