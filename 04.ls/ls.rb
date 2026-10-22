@@ -44,4 +44,4 @@ opt = OptionParser.new
 show_all = false
 opt.on('-a') { |v| show_all = v }
 paths = opt.parse(ARGV)
-ls(paths.empty? ? '.' : path[0], show_all)
+ls(paths.empty? ? '.' : paths[0], show_all)
