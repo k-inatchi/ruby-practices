@@ -3,8 +3,9 @@
 
 require 'optparse'
 
-def ls(target_dir, show_all)
-  files = (show_all ? Dir.entries(target_dir) : Dir.glob('*', base: target_dir)).sort
+def ls(target_dir, sort_reverse)
+  sorted_files = Dir.glob('*', base: target_dir).sort
+  files = sort_reverse == true ? sorted_files.reverse : sorted_files
   return if files.empty?
 
   tab_space = 8
@@ -41,7 +42,7 @@ def str_length(str)
 end
 
 opt = OptionParser.new
-show_all = false
-opt.on('-a') { |v| show_all = v }
+sort_reverse = false
+opt.on('-r') { |v| sort_reverse = v }
 paths = opt.parse(ARGV)
-ls(paths.empty? ? '.' : paths[0], show_all)
+ls(paths.empty? ? '.' : paths[0], sort_reverse)
